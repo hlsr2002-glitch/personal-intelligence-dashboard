@@ -1,0 +1,20 @@
+{
+  "assets": [
+    {"symbol": "SPY", "name": "S&P 500 (ETF de referência)"},
+    {"symbol": "QQQ", "name": "Nasdaq 100 (ETF de referência)"},
+    {"symbol": "VGK", "name": "Europa desenvolvida"},
+    {"symbol": "URTH", "name": "MSCI World (ETF de referência)"},
+    {"symbol": "EEM", "name": "Mercados emergentes"},
+    {"symbol": "GLD", "name": "Ouro (ETF de referência)"},
+    {"symbol": "USO", "name": "Petróleo (ETF de referência)"}
+  ],
+  "macro_series": [
+    {"id": "CPIAUCSL", "name": "Inflação (CPI, EUA)", "unit": "índice"},
+    {"id": "FEDFUNDS", "name": "Taxa de fundos federais (EUA)", "unit": "%"},
+    {"id": "UNRATE", "name": "Desemprego (EUA)", "unit": "%"},
+    {"id": "GDP", "name": "PIB (EUA)", "unit": "mil milhões USD"},
+    {"id": "DGS10", "name": "Treasury a 10 anos (EUA)", "unit": "%"},
+    {"id": "VIXCLS", "name": "VIX", "unit": "pontos"}
+  ],
+  "research_topics": "macroeconomics artificial intelligence energy semiconductors"
+}
