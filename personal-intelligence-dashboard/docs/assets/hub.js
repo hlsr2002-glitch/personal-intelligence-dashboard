@@ -324,7 +324,7 @@
       '<form class="filters" id="history-filters">' + categoryFilter +
       '<div class="filter-control"><label for="history-since">Desde</label><input id="history-since" type="date"></div><button class="button" type="submit">Filtrar histórico</button></form>' +
       '<div class="card" style="margin-top:13px" id="history-list">' + historyRows(history) + "</div></section>" +
-      '<section class="section"><div class="card"><div class="card-kicker">PREFERÊNCIAS USADAS</div><h3>Empreendedorismo em Portugal, tecnologia, serviços digitais e investimento inicial reduzido</h3><p class="metric-note">Estas preferências vêm do pedido desta fase. Não há perfil pessoal nem dados privados ligados a esta conta. A pontuação deve ser revista à medida que existirem dados de procura, custos e concorrência.</p></div></section>';
+      '<section class="section"><div class="card"><div class="card-kicker">ÂMBITO EDITORIAL</div><h3>Oportunidades em Portugal, tecnologia e serviços digitais</h3><p class="metric-note">O radar dá prioridade a projetos de menor investimento quando a fonte permite confirmá-lo. Não guarda um perfil pessoal nem usa histórico privado. A pontuação deve ser revista quando houver dados de procura, custos e concorrência.</p></div></section>';
   }
 
   function renderTrends() {

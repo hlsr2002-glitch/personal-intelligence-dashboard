@@ -721,10 +721,10 @@ def score_opportunity(
     criteria = [
         {
             "id": "compatibility",
-            "label": "Compatibilidade com os interesses indicados",
+            "label": "Relevância para o âmbito editorial do Hub",
             "weight": 20,
             "points": opportunity.get("fit_points"),
-            "basis": "Regra editorial: tecnologia, empreendedorismo em Portugal e baixo investimento inicial."
+            "basis": "Regra editorial: empreendedorismo, tecnologia e oportunidades em Portugal; não usa histórico pessoal."
         },
         {
             "id": "demand",
