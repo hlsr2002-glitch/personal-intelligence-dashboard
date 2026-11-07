@@ -2,180 +2,68 @@
 <html lang="pt-PT">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Painel pessoal de indicadores públicos de mercados, economia portuguesa e investigação, com explicações claras e alertas seletivos.">
-  <meta name="theme-color" content="#080d18">
-  <title>Personal Intelligence Dashboard</title>
-  <style>
-    :root{color-scheme:dark;--bg:#080d18;--panel:#101827;--panel2:#131e30;--line:#223047;--text:#edf3fc;--muted:#91a0b7;--teal:#58dbc4;--blue:#7da8ff;--amber:#f4c46b;--red:#ff8585;--green:#78d9a9;--radius:18px;--shadow:0 14px 40px #0002;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:radial-gradient(ellipse at 80% -18%,#1b3150 0,transparent 39%),var(--bg);color:var(--text);font-size:15px;line-height:1.55}a{color:var(--blue);text-underline-offset:3px}a:hover{color:#b5ccff}button,select{font:inherit;color:inherit}button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--teal);outline-offset:3px}.wrap{width:min(1200px,calc(100% - 40px));margin:auto}.topbar{position:sticky;top:0;z-index:20;background:#080d18e8;border-bottom:1px solid #223047b8;backdrop-filter:blur(16px)}.topinner{min-height:68px;display:flex;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:750;letter-spacing:-.025em}.brandmark{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;color:#07121b;background:linear-gradient(140deg,var(--teal),#8ab4ff);font-size:19px}.nav{display:flex;gap:5px;margin-left:auto;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{white-space:nowrap;color:var(--muted);text-decoration:none;padding:9px 11px;border-radius:10px;font-size:13px}.nav a:hover,.nav a.active{color:var(--text);background:#172337}.header-date{color:var(--muted);font-size:12px;white-space:nowrap}.hero{padding:54px 0 25px;display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:end}.eyebrow{color:var(--teal);text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:750}.hero h1{font-size:clamp(34px,5vw,55px);line-height:1.04;letter-spacing:-.055em;margin:12px 0}.hero p{max-width:650px;color:#adbad0;font-size:16px;margin:0}.hero-side{justify-self:end;max-width:340px;padding:18px 20px;border:1px solid #2a3b54;border-radius:16px;background:linear-gradient(145deg,#122034,#101827)}.statusline{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650}.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 14px #58dbc477}.hero-side p{font-size:12px;margin-top:7px}.section{padding:26px 0 36px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:0 0 17px}.section-head h2{margin:4px 0 0;font-size:24px;letter-spacing:-.035em}.section-head p{margin:0;color:var(--muted);font-size:13px;max-width:560px}.grid{display:grid;gap:14px}.cards{grid-template-columns:repeat(4,minmax(0,1fr))}.card,.panel{border:1px solid var(--line);background:linear-gradient(155deg,#121d2d,#0e1624);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:18px;min-width:0}.card-label{font-size:12px;color:var(--muted)}.card-value{font-size:25px;font-weight:720;letter-spacing:-.04em;margin:8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-foot{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}.change-up{color:var(--green)!important}.change-down{color:var(--red)!important}.neutral{color:var(--muted)}.definition{font-size:12px;color:#a9b6ca;margin:12px 0 0}.panel{padding:20px}.chart-panel{margin-top:15px}.chart-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.chart-tools label{font-size:12px;color:var(--muted);display:flex;gap:9px;align-items:center}.chart-tools select{background:#0b1320;border:1px solid var(--line);padding:8px 32px 8px 10px;border-radius:10px;max-width:min(370px,60vw)}.ranges{display:flex;gap:5px;background:#0b1320;border:1px solid #1e2b40;padding:4px;border-radius:11px}.ranges button{border:0;background:transparent;color:var(--muted);padding:6px 9px;border-radius:8px;cursor:pointer;font-size:11px}.ranges button[aria-pressed=true]{background:#1d2d43;color:var(--text)}.chart-wrap{position:relative;width:100%;height:290px}.chart-wrap canvas{width:100%;height:100%;display:block;touch-action:pan-y}.chart-tooltip{display:none;position:absolute;z-index:2;pointer-events:none;padding:8px 10px;background:#050a12;border:1px solid #30415a;border-radius:10px;font-size:11px;box-shadow:var(--shadow);min-width:125px}.chart-note{margin:4px 0 0;color:var(--muted);font-size:11px}.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #30415a;border-radius:14px}.alert-list{display:grid;gap:9px}.alert{border:1px solid #563843;background:#241720;border-radius:13px;padding:13px 15px}.alert strong{display:block;color:#ffaaaa}.alert p{margin:4px 0 0;color:#d1b6bc;font-size:13px}.info-banner{margin-top:14px;padding:12px 14px;border:1px solid #293b53;border-radius:12px;color:#adbad0;font-size:12px;background:#101a29}.two-col{grid-template-columns:1fr 1fr}.insight{padding:16px;border:1px solid var(--line);border-radius:14px;background:#101a29}.insight h3{margin:0;font-size:15px}.insight p{margin:8px 0;color:#b9c5d6;font-size:13px}.insight small{color:var(--muted)}.source-link{font-size:11px}.research-list{display:grid;gap:13px}.article{padding:18px;border:1px solid var(--line);border-radius:15px;background:#101a29}.article-top{display:flex;justify-content:space-between;gap:14px;align-items:start}.article h3{margin:0 0 5px;font-size:16px;line-height:1.4}.article-meta{color:var(--muted);font-size:11px}.badge{border:1px solid #284b50;color:var(--teal);background:#112a2b;border-radius:999px;padding:4px 8px;font-size:10px;white-space:nowrap}.article p{font-size:13px;color:#b9c5d6;margin:11px 0 0}.article b{color:#e7edf6}.article-links{margin-top:11px;display:flex;gap:14px;flex-wrap:wrap;font-size:12px}.disabled{display:flex;gap:15px;align-items:flex-start;border:1px dashed #38475d;background:#101827a8;border-radius:16px;padding:20px}.lock{font-size:23px}.disabled h3{margin:0 0 4px}.disabled p{color:#a9b6ca;margin:0;font-size:13px}.footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:11px}.footer-grid{display:flex;justify-content:space-between;gap:25px}.footer p{max-width:750px;margin:0}.smallcaps{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:700}.loading{color:var(--muted)}
-    @media(max-width:900px){.header-date{display:none}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr;gap:18px;padding-top:38px}.hero-side{justify-self:start;max-width:none;width:100%}.topinner{gap:12px}.brand-label{display:none}}
-    @media(max-width:620px){.wrap{width:min(100% - 26px,1200px)}.topinner{min-height:58px;gap:8px}.brandmark{width:30px;height:30px}.nav{margin-left:0}.nav a{font-size:11px;padding:8px}.hero{padding:34px 0 18px}.hero h1{font-size:37px}.hero p{font-size:14px}.section{padding:21px 0 27px}.section-head{align-items:start;display:block}.section-head p{margin-top:7px}.section-head h2{font-size:21px}.cards{gap:9px}.card{padding:13px;border-radius:14px}.card-value{font-size:20px}.card-foot{display:block}.card-foot span{display:block;margin-top:3px}.panel{padding:13px;border-radius:15px}.chart-wrap{height:230px}.chart-tools{align-items:start}.chart-tools label{width:100%;display:block}.chart-tools select{display:block;width:100%;max-width:none;margin-top:5px}.ranges{width:100%;justify-content:space-between}.ranges button{flex:1;padding:7px 4px}.two-col{grid-template-columns:1fr}.article{padding:14px}.article-top{display:block}.badge{display:inline-flex;margin-top:8px}.footer-grid{display:block}.footer-grid div{margin-top:12px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1018">
+  <meta name="description" content="Briefing diário com oportunidades e sinais verificados.">
+  <title>Início · Personal Intelligence Hub</title>
+  <link rel="stylesheet" href="assets/hub.css">
+  <script defer src="assets/hub.js"></script>
 </head>
-<body>
-  <header class="topbar">
-    <div class="wrap topinner">
-      <a class="brand" href="#inicio" aria-label="Personal Intelligence Dashboard, início"><span class="brandmark" aria-hidden="true">◒</span><span class="brand-label">Personal Intelligence</span></a>
-      <nav class="nav" aria-label="Navegação principal">
-        <a href="#resumo">Resumo</a><a href="#mercados">Mercados</a><a href="#portugal">Portugal</a><a href="#analise">Análise</a><a href="#educacao">Educação</a><a href="#saude">Saúde</a>
+<body data-page="home">
+  <a class="skip-link" href="#main">Saltar para o conteúdo principal</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html" data-route="home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+<circle cx="20" cy="20" r="15.5" fill="none" stroke="#88aaff" stroke-width="1.6"/>
+<circle cx="20" cy="20" r="6" fill="#58dbc4"/><path d="M20 3v7M37 20h-7M20 37v-7M3 20h7" stroke="#7888a5" stroke-width="1.2"/>
+</svg>
+        <span class="brand-text"><strong>PERSONAL</strong><span>INTELLIGENCE HUB</span></span>
+      </a>
+      <div class="workspace-label">ESPAÇO PESSOAL <span aria-hidden="true">·</span> PÚBLICO</div>
+      <nav class="side-nav" aria-label="Navegação principal">
+        <a class="nav-link" href="index.html" data-route="home" aria-current="page"><span class="nav-icon" aria-hidden="true">◈</span><span>Início</span></a>
+<a class="nav-link" href="opportunities.html" data-route="opportunities"><span class="nav-icon" aria-hidden="true">✳</span><span>Oportunidades</span></a>
+<a class="nav-link" href="advisor.html" data-route="advisor"><span class="nav-icon" aria-hidden="true">⌁</span><span>Conselheiro</span></a>
+<a class="nav-link" href="trends.html" data-route="trends"><span class="nav-icon" aria-hidden="true">↗</span><span>Tendências</span></a>
+<a class="nav-link" href="knowledge.html" data-route="knowledge"><span class="nav-icon" aria-hidden="true">⌘</span><span>Conhecimento</span></a>
+<a class="nav-link" href="economy.html" data-route="economy"><span class="nav-icon" aria-hidden="true">◷</span><span>Economia</span></a>
+<a class="nav-link" href="projects.html" data-route="projects"><span class="nav-icon" aria-hidden="true">◇</span><span>Projetos</span></a>
+<a class="nav-link" href="alerts.html" data-route="alerts"><span class="nav-icon" aria-hidden="true">◎</span><span>Alertas</span></a>
       </nav>
-      <span class="header-date" id="header-date">A carregar…</span>
+      <div class="sidebar-bottom">
+        <div class="source-status"><span class="pulse" aria-hidden="true"></span><span id="source-status">A carregar fontes públicas</span></div>
+        <div class="sidebar-note">Sinais fundamentados.<br>Decisões continuam a ser tuas.</div>
+        <a class="sidebar-help" href="https://github.com/hlsr2002-glitch/personal-intelligence-dashboard/blob/main/personal-intelligence-dashboard/README.md" target="_blank" rel="noopener noreferrer">Como funciona <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+    <div class="main-column">
+      <header class="topbar">
+        <div class="mobile-brand"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+<circle cx="20" cy="20" r="15.5" fill="none" stroke="#88aaff" stroke-width="1.6"/>
+<circle cx="20" cy="20" r="6" fill="#58dbc4"/><path d="M20 3v7M37 20h-7M20 37v-7M3 20h7" stroke="#7888a5" stroke-width="1.2"/>
+</svg><span>INTELLIGENCE HUB</span></div>
+        <div class="breadcrumbs"><span>PAINEL</span><b aria-hidden="true">/</b><strong id="crumb-title">Início</strong></div>
+        <div class="topbar-meta"><span class="topbar-date" id="updated-label">A sincronizar…</span><span class="avatar" aria-label="Perfil privado não configurado">H</span></div>
+      </header>
+      <nav class="mobile-nav" aria-label="Navegação principal">
+        <a class="nav-link" href="index.html" data-route="home" aria-current="page"><span class="nav-icon" aria-hidden="true">◈</span><span>Início</span></a>
+<a class="nav-link" href="opportunities.html" data-route="opportunities"><span class="nav-icon" aria-hidden="true">✳</span><span>Oportunidades</span></a>
+<a class="nav-link" href="advisor.html" data-route="advisor"><span class="nav-icon" aria-hidden="true">⌁</span><span>Conselheiro</span></a>
+<a class="nav-link" href="trends.html" data-route="trends"><span class="nav-icon" aria-hidden="true">↗</span><span>Tendências</span></a>
+<a class="nav-link" href="knowledge.html" data-route="knowledge"><span class="nav-icon" aria-hidden="true">⌘</span><span>Conhecimento</span></a>
+<a class="nav-link" href="economy.html" data-route="economy"><span class="nav-icon" aria-hidden="true">◷</span><span>Economia</span></a>
+<a class="nav-link" href="projects.html" data-route="projects"><span class="nav-icon" aria-hidden="true">◇</span><span>Projetos</span></a>
+<a class="nav-link" href="alerts.html" data-route="alerts"><span class="nav-icon" aria-hidden="true">◎</span><span>Alertas</span></a>
+      </nav>
+      <main id="main" class="page-main" tabindex="-1">
+        <div class="loading-state" role="status"><span class="spinner" aria-hidden="true"></span>A preparar o painel…</div>
+      </main>
+      <footer class="page-footer">
+        <span>PERSONAL INTELLIGENCE HUB <b>·</b> PROTÓTIPO PÚBLICO</span>
+        <span>Fontes originais e limitações junto a cada sinal.</span>
+      </footer>
     </div>
-  </header>
-  <main id="inicio" class="wrap">
-    <section class="hero" aria-labelledby="page-title">
-      <div><div class="eyebrow">Sinais claros, contexto útil</div><h1 id="page-title">O que está a<br>mover o mundo?</h1><p>Mercados globais, economia portuguesa e investigação recente, reunidos num só lugar e explicados em linguagem simples.</p></div>
-      <aside class="hero-side"><div class="statusline"><span class="dot" aria-hidden="true"></span><span id="status-text">A carregar dados públicos</span></div><p id="hero-updated">As séries têm frequências e datas de publicação diferentes.</p></aside>
-    </section>
-
-    <section id="resumo" class="section">
-      <div class="section-head"><div><div class="eyebrow">Agora</div><h2>Resumo do painel</h2></div><p>Uma leitura rápida do que os dados mostram. Os avisos seguem limiares seletivos para evitar reagir ao ruído normal.</p></div>
-      <div id="alerts" class="alert-list"><div class="empty">A carregar estado dos alertas…</div></div>
-      <div class="info-banner">Um alerta assinala um limiar estatístico, não recomenda comprar ou vender. Sem alertas significa apenas que as regras definidas não foram acionadas.</div>
-    </section>
-
-    <section id="mercados" class="section">
-      <div class="section-head"><div><div class="eyebrow">Mercados globais</div><h2>Ativos acompanhados</h2></div><p>ETFs usados como referências para índices, regiões e matérias-primas. Os preços podem ter atraso e estão em USD.</p></div>
-      <div id="market-cards" class="grid cards"><div class="empty">A carregar séries de mercado…</div></div>
-      <div class="panel chart-panel">
-        <div class="chart-tools"><label for="market-series">Série do gráfico<select id="market-series" aria-label="Escolher ativo para o gráfico"></select></label><div class="ranges" role="group" aria-label="Período do gráfico de mercado"><button type="button" data-range="30" aria-pressed="false">30d</button><button type="button" data-range="90" aria-pressed="true">90d</button><button type="button" data-range="all" aria-pressed="false">Máx.</button></div></div>
-        <div class="chart-wrap"><canvas id="market-chart" aria-label="Gráfico interativo de preço histórico" role="img"></canvas><div class="chart-tooltip" aria-hidden="true"></div></div>
-        <p class="chart-note">Seleciona um período ou toca no gráfico para consultar os valores. A cobertura da fonte gratuita é de cerca de 100 sessões de negociação.</p>
-      </div>
-    </section>
-
-    <section id="portugal" class="section">
-      <div class="section-head"><div><div class="eyebrow">Economia portuguesa</div><h2>Indicadores de Portugal</h2></div><p>Dados públicos do Eurostat. Os valores mais recentes podem ser revistos e os indicadores não são publicados todos no mesmo dia.</p></div>
-      <div id="portugal-cards" class="grid cards"><div class="empty">A carregar indicadores de Portugal…</div></div>
-      <div class="panel chart-panel">
-        <div class="chart-tools"><label for="portugal-series">Indicador para explorar<select id="portugal-series" aria-label="Escolher indicador português para o gráfico"></select></label><div class="ranges" role="group" aria-label="Período do gráfico de Portugal"><button type="button" data-range="365" aria-pressed="false">1 ano</button><button type="button" data-range="1095" aria-pressed="true">3 anos</button><button type="button" data-range="all" aria-pressed="false">Máx.</button></div></div>
-        <div class="chart-wrap"><canvas id="portugal-chart" aria-label="Gráfico histórico de economia portuguesa" role="img"></canvas><div class="chart-tooltip" aria-hidden="true"></div></div>
-        <p class="chart-note">O filtro de período altera apenas o intervalo visível. Toca no gráfico para ler uma observação.</p>
-      </div>
-    </section>
-
-    <section id="macro" class="section">
-      <div class="section-head"><div><div class="eyebrow">Contexto internacional</div><h2>Indicadores dos Estados Unidos</h2></div><p>Servem de contexto para condições financeiras globais; não descrevem diretamente a economia portuguesa.</p></div>
-      <div id="macro-cards" class="grid cards"><div class="empty">A carregar indicadores macroeconómicos…</div></div>
-      <div class="panel chart-panel">
-        <div class="chart-tools"><label for="macro-series">Indicador para explorar<select id="macro-series" aria-label="Escolher indicador dos Estados Unidos para o gráfico"></select></label><div class="ranges" role="group" aria-label="Período do gráfico macroeconómico"><button type="button" data-range="365" aria-pressed="false">1 ano</button><button type="button" data-range="1095" aria-pressed="true">3 anos</button><button type="button" data-range="all" aria-pressed="false">Máx.</button></div></div>
-        <div class="chart-wrap"><canvas id="macro-chart" aria-label="Gráfico histórico macroeconómico" role="img"></canvas><div class="chart-tooltip" aria-hidden="true"></div></div>
-        <p class="chart-note">Dados publicados por frequência diária, mensal ou trimestral, conforme a série selecionada.</p>
-      </div>
-    </section>
-
-    <section id="analise" class="section">
-      <div class="section-head"><div><div class="eyebrow">Leitura fundamentada</div><h2>Oportunidades e riscos a acompanhar</h2></div><p>Observações automáticas ligadas a dados e regras visíveis. São pontos de investigação, não previsões.</p></div>
-      <div class="grid two-col"><div><div class="smallcaps" style="margin:0 0 9px;color:var(--green)">Sinais construtivos</div><div id="opportunities" class="grid"><div class="empty">A preparar análise…</div></div></div><div><div class="smallcaps" style="margin:0 0 9px;color:var(--amber)">Riscos a vigiar</div><div id="risks" class="grid"><div class="empty">A preparar análise…</div></div></div></div>
-      <div class="info-banner">Como interpretar: uma oportunidade é um dado recente que pode justificar investigação adicional; um risco é uma pressão observada ou um limiar ultrapassado. Nenhum dos dois prevê o futuro. As regras e fontes são apresentadas junto a cada sinal.</div>
-    </section>
-
-    <section id="educacao" class="section">
-      <div class="section-head"><div><div class="eyebrow">Aprender com evidência</div><h2>Investigação recente</h2></div><p>Resumos curtos a partir dos abstracts indexados no OpenAlex. Lê o artigo original para confirmar método, limitações e conclusões.</p></div>
-      <div id="research-list" class="research-list"><div class="empty">A carregar artigos…</div></div>
-    </section>
-
-    <section id="saude" class="section">
-      <div class="section-head"><div><div class="eyebrow">Fase futura</div><h2>Saúde</h2></div></div>
-      <div id="health-card" class="disabled"><span class="lock" aria-hidden="true">◈</span><div><h3>Preparado para uma integração privada</h3><p>Esta área está desativada. O dashboard não recolhe, guarda nem publica dados de saúde. Uma futura integração deverá usar armazenamento privado e consentimento explícito.</p></div></div>
-    </section>
-  </main>
-  <footer class="footer"><div class="wrap footer-grid"><p>Fontes: Alpha Vantage, FRED, Eurostat e OpenAlex. As datas de referência estão indicadas por série. Valores sujeitos a atualização e revisão pelas fontes originais. Informação geral, sem aconselhamento financeiro.</p><div>Personal Intelligence Dashboard<br><span id="footer-updated">Dados públicos</span></div></div></footer>
-
-  <script>
-  (() => {
-    'use strict';
-    const $ = (selector, root=document) => root.querySelector(selector);
-    const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-    const safeUrl = value => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : ''; } catch { return ''; } };
-    const fmt = (value, digits=1) => Number.isFinite(Number(value)) ? new Intl.NumberFormat('pt-PT',{minimumFractionDigits:digits,maximumFractionDigits:digits}).format(Number(value)) : '—';
-    const dateLabel = value => { if (!value) return 'data indisponível'; const q = String(value).match(/^(\d{4})-Q([1-4])$/); if (q) return `T${q[2]} ${q[1]}`; const d = new Date(value.length === 7 ? `${value}-01T00:00:00Z` : value); return Number.isNaN(d.valueOf()) ? value : new Intl.DateTimeFormat('pt-PT',{year:'numeric',month:'short',day:value.length>7?'2-digit':undefined,timeZone:'UTC'}).format(d); };
-    const updatedLabel = value => { if(!value)return 'Data de atualização indisponível'; const d=new Date(value); return Number.isNaN(d.valueOf())?'Atualização indisponível':`Atualizado ${new Intl.DateTimeFormat('pt-PT',{dateStyle:'medium',timeStyle:'short'}).format(d)}`; };
-    const dateValue = value => { const q=String(value).match(/^(\d{4})-Q([1-4])$/); return q ? Date.UTC(Number(q[1]),(Number(q[2])-1)*3,1) : Date.parse(String(value).length===7?`${value}-01T00:00:00Z`:value); };
-    const records = list => Array.isArray(list) ? list : [];
-    const history = item => records(item?.history).filter(point => Number.isFinite(Number(point.value)) && point.date);
-    const source = (name,url) => { const href=safeUrl(url); return href ? `<a class="source-link" href="${esc(href)}" target="_blank" rel="noopener noreferrer">Fonte: ${esc(name||'fonte original')} ↗</a>` : `<span class="source-link">Fonte: ${esc(name||'dashboard')}</span>`; };
-    const setEmpty = (id, message) => { const node=document.getElementById(id); if(node)node.innerHTML=`<div class="empty">${esc(message)}</div>`; };
-
-    function renderCards(id, items, kind) {
-      const root=document.getElementById(id); if(!items.length){setEmpty(id,'Sem dados disponíveis nesta atualização. Confirma as chaves e a execução automática.');return;}
-      root.innerHTML=items.map(item=>{
-        const label=item.name||item.id||item.symbol;
-        let value='—', foot='';
-        if(kind==='market') { value=`${fmt(item.price,2)} ${esc(item.currency||'USD')}`; const change=Number(item.change_pct); const cls=change>0?'change-up':change<0?'change-down':'neutral'; foot=`<span class="${cls}">${change>0?'+':''}${fmt(change,2)}% no último dia negociado</span><span>${esc(dateLabel(item.date))}</span>`; }
-        else { value=`${fmt(item.value,1)}${item.unit?` ${esc(item.unit)}`:''}`; foot=`<span>${esc(item.frequency||'')}</span><span>${esc(dateLabel(item.date))}</span>`; }
-        const definition=item.description?`<p class="definition">${esc(item.description)}</p>`:'';
-        return `<article class="card"><div class="card-label">${esc(label)}</div><div class="card-value">${value}</div><div class="card-foot">${foot}</div>${definition}<div style="margin-top:10px">${source(item.source,item.source_url)}</div></article>`;
-      }).join('');
-    }
-
-    function renderAlerts(items) {
-      const root=$('#alerts');
-      if(!items.length){root.innerHTML='<div class="empty">Sem alertas críticos ou oportunidades que ultrapassem os limiares nesta atualização.</div>';return;}
-      root.innerHTML=items.map(a=>`<article class="alert"><strong>${esc(a.title||'Alerta')}</strong><p>${esc(a.detail||'')}</p></article>`).join('');
-    }
-    function renderInsights(id, items) {
-      const root=document.getElementById(id); const list=records(items);
-      if(!list.length){setEmpty(id,'Sem sinal destacado pelas regras atuais.');return;}
-      root.innerHTML=list.map(item=>`<article class="insight"><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p><small>${source(item.source,item.source_url)}${item.context_source?` · ${source(item.context_source,item.context_source_url)}`:''}</small></article>`).join('');
-    }
-    function renderResearch(items) {
-      const root=$('#research-list'); if(!items.length){setEmpty('research-list','Não foram encontrados artigos recentes com resumo disponível nesta atualização.');return;}
-      root.innerHTML=items.map(item=>{
-        const href=safeUrl(item.url); const doi=safeUrl(item.doi);
-        const link=href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">Abrir registo ou artigo ↗</a>`:'';
-        const doiLink=doi&&doi!==href?`<a href="${esc(doi)}" target="_blank" rel="noopener noreferrer">DOI ↗</a>`:'';
-        const oa=item.open_access?'<span class="badge">Acesso aberto indicado</span>':'<span class="badge" style="color:#b1bfd4;border-color:#344257;background:#172132">Acesso aberto não confirmado</span>';
-        return `<article class="article"><div class="article-top"><div><h3>${href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(item.title||'Artigo sem título')} ↗</a>`:esc(item.title||'Artigo sem título')}</h3><div class="article-meta">${esc(item.source||'OpenAlex')} · ${esc(dateLabel(item.date))}${Number.isFinite(Number(item.citations))?` · ${esc(item.citations)} citações registadas`:''}</div></div>${oa}</div><p><b>Resumo:</b> ${esc(item.summary||'Não há resumo disponível.')}</p><p><b>Conclusão destacada:</b> ${esc(item.conclusion||'Consulta o artigo original para as conclusões.')}</p><p><b>Porque pode valer a leitura:</b> ${esc(item.why_read||'Pode ajudar a aprofundar o tema.')}</p><div class="article-links">${link}${doiLink}<span class="article-meta">${esc(item.summary_basis||'Resumo baseado no registo indexado; confirma no original.')}</span></div></article>`;
-      }).join('');
-    }
-
-    function setupChart({canvasId,selectId,rangeGroup,items,initialRange,normalize=false}) {
-      const canvas=document.getElementById(canvasId), select=document.getElementById(selectId); if(!canvas||!select)return;
-      const available=items.filter(item=>history(item).length);
-      if(!available.length){const wrap=canvas.parentElement; wrap.innerHTML='<div class="empty">Sem histórico disponível para desenhar o gráfico.</div>';return;}
-      select.innerHTML=available.map((item,index)=>`<option value="${index}">${esc(item.name||item.id||item.symbol)}</option>`).join('');
-      const wrap=canvas.parentElement, tooltip=$('.chart-tooltip',wrap), ctx=canvas.getContext('2d'); let days=initialRange, points=[], rect, dpr=1;
-      const draw=()=>{
-        const item=available[Number(select.value)||0]; let all=history(item);
-        if(days!=='all'&&all.length){ const newest=dateValue(all[all.length-1].date); const cutoff=newest-Number(days)*86400000; all=all.filter(p=>dateValue(p.date)>=cutoff); }
-        if(normalize&&all.length){const base=Number(all[0].value);if(base)all=all.map(p=>({...p,value:(Number(p.value)/base-1)*100}));}
-        points=all; rect=canvas.getBoundingClientRect(); dpr=window.devicePixelRatio||1; canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(rect.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);
-        const width=rect.width,height=rect.height,left=52,right=12,top=15,bottom=28,plotW=Math.max(1,width-left-right),plotH=Math.max(1,height-top-bottom);
-        ctx.clearRect(0,0,width,height); if(!points.length)return;
-        const vals=points.map(p=>Number(p.value)); let min=Math.min(...vals),max=Math.max(...vals); if(min===max){min-=1;max+=1;} const pad=(max-min)*.09; min-=pad;max+=pad;
-        ctx.font='10px system-ui';ctx.lineWidth=1;ctx.strokeStyle='#26344a';ctx.fillStyle='#8292a8';ctx.textAlign='right';ctx.textBaseline='middle';
-        for(let i=0;i<4;i++){const y=top+plotH*i/3;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(width-right,y);ctx.stroke();ctx.fillText(fmt(max-(max-min)*i/3,normalize?1:Math.abs(max)>100?0:2),left-8,y);}
-        const x=i=>left+(points.length<2?plotW/2:i/(points.length-1)*plotW), y=v=>top+(max-v)/(max-min)*plotH;
-        ctx.beginPath();points.forEach((p,i)=>{const px=x(i),py=y(Number(p.value));if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);});ctx.lineWidth=2.4;ctx.strokeStyle=normalize?'#7da8ff':'#58dbc4';ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
-        const gradient=ctx.createLinearGradient(0,top,0,top+plotH);gradient.addColorStop(0,normalize?'#7da8ff2b':'#58dbc426');gradient.addColorStop(1,'#58dbc400');ctx.lineTo(x(points.length-1),top+plotH);ctx.lineTo(x(0),top+plotH);ctx.closePath();ctx.fillStyle=gradient;ctx.fill();
-        ctx.fillStyle='#8292a8';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(dateLabel(points[0].date),left,top+plotH+9);ctx.textAlign='right';ctx.fillText(dateLabel(points[points.length-1].date),width-right,top+plotH+9);
-      };
-      const showAt=event=>{if(!points.length)return;const bounds=canvas.getBoundingClientRect();const localX=event.clientX-bounds.left;const left=52,right=12,usable=Math.max(1,bounds.width-left-right);const fraction=Math.min(1,Math.max(0,(localX-left)/usable));const idx=Math.round(fraction*(points.length-1));const point=points[idx];if(!point)return;const px=left+(points.length<2?usable/2:idx/(points.length-1)*usable);tooltip.innerHTML=`<strong>${esc(dateLabel(point.date))}</strong><br>${esc(fmt(point.value,2))}${normalize?'%':` ${esc(available[Number(select.value)||0].unit||'')}`}`;tooltip.style.display='block';tooltip.style.left=`${Math.min(Math.max(8,px+10),Math.max(8,bounds.width-145))}px`;tooltip.style.top='8px';};
-      canvas.addEventListener('pointermove',showAt);canvas.addEventListener('pointerdown',showAt);canvas.addEventListener('pointerleave',()=>{tooltip.style.display='none';});select.addEventListener('change',draw);
-      rangeGroup.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{days=button.dataset.range==='all'?'all':Number(button.dataset.range);rangeGroup.querySelectorAll('button').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));draw();}));
-      new ResizeObserver(draw).observe(wrap);draw();
-    }
-
-    async function start() {
-      try {
-        const response=await fetch(`data.json?v=${Date.now()}`,{cache:'no-store'}); if(!response.ok)throw new Error('data'); const data=await response.json();
-        const updated=updatedLabel(data.updated_at);$('#header-date').textContent=updated;$('#hero-updated').textContent=`${updated}. As séries têm frequências e datas de publicação diferentes.`;$('#footer-updated').textContent=updated;$('#status-text').textContent='Dados públicos carregados';
-        const quotes=records(data.quotes), portugal=records(data.portugal), macro=records(data.macro);
-        renderAlerts(records(data.alerts));renderCards('market-cards',quotes,'market');renderCards('portugal-cards',portugal,'macro');renderCards('macro-cards',macro,'macro');
-        renderInsights('opportunities',data.insights?.opportunities);renderInsights('risks',data.insights?.risks);renderResearch(records(data.research));
-        setupChart({canvasId:'market-chart',selectId:'market-series',rangeGroup:$('#mercados .ranges'),items:quotes,initialRange:90});
-        setupChart({canvasId:'portugal-chart',selectId:'portugal-series',rangeGroup:$('#portugal .ranges'),items:portugal,initialRange:1095});
-        setupChart({canvasId:'macro-chart',selectId:'macro-series',rangeGroup:$('#macro .ranges'),items:macro,initialRange:1095});
-      } catch {
-        $('#status-text').textContent='Não foi possível carregar os dados';$('#hero-updated').textContent='Tenta novamente mais tarde; os dados dependem da última execução automática.';
-        ['alerts','market-cards','portugal-cards','macro-cards','opportunities','risks','research-list'].forEach(id=>setEmpty(id,'Dados temporariamente indisponíveis.'));
-      }
-    }
-    start();
-  })();
-  </script>
+  </div>
 </body>
 </html>

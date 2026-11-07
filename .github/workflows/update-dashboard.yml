@@ -33,6 +33,22 @@ jobs:
           restore-keys: |
             alert-state-
 
+      - name: Recuperar histórico público de recomendações
+        uses: actions/cache/restore@v5
+        with:
+          path: personal-intelligence-dashboard/data/recommendation_history.json
+          key: recommendation-history-${{ github.run_id }}
+          restore-keys: |
+            recommendation-history-
+
+      - name: Recuperar histórico público de alertas
+        uses: actions/cache/restore@v5
+        with:
+          path: personal-intelligence-dashboard/data/alert_history.json
+          key: alert-history-${{ github.run_id }}
+          restore-keys: |
+            alert-history-
+
       - name: Gerar dados e dashboard
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
@@ -40,11 +56,26 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python3 personal-intelligence-dashboard/build_dashboard.py
 
+      - name: Construir páginas do Hub
+        run: python3 personal-intelligence-dashboard/build_site.py
+
       - name: Guardar estado de alertas
         uses: actions/cache/save@v5
         with:
           path: personal-intelligence-dashboard/data/active_alerts.json
           key: alert-state-${{ github.run_id }}
+
+      - name: Guardar histórico público de recomendações
+        uses: actions/cache/save@v5
+        with:
+          path: personal-intelligence-dashboard/data/recommendation_history.json
+          key: recommendation-history-${{ github.run_id }}
+
+      - name: Guardar histórico público de alertas
+        uses: actions/cache/save@v5
+        with:
+          path: personal-intelligence-dashboard/data/alert_history.json
+          key: alert-history-${{ github.run_id }}
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5

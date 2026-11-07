@@ -2,6 +2,7 @@ import json
 import sys
 import unittest
 from pathlib import Path
+from datetime import date
 from unittest.mock import patch
 
 APP_DIR = Path(__file__).resolve().parents[1]
@@ -37,6 +38,56 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual([a["id"] for a in dashboard.make_alerts(quotes, [])], ["queda:QQQ"])
         self.assertEqual(dashboard.make_alerts([], [{"id": "VIXCLS", "value": 35}]), [])
         self.assertEqual(dashboard.make_alerts([], [{"id": "VIXCLS", "value": 35.1, "date": "2026-11-06"}])[0]["id"], "vix:acima-35")
+
+    def test_opportunity_score_explains_unknowns_and_is_not_a_success_probability(self):
+        arrisca = next(item for item in dashboard.current_opportunities(date(2026, 11, 7)) if item["id"] == "arrisca-c-2026")
+        self.assertEqual(arrisca["score_label"], "Prioridade de investigação")
+        self.assertEqual(arrisca["score"], 33)
+        self.assertEqual(arrisca["score_confidence"], 35)
+        criteria = {item["id"]: item for item in arrisca["score_criteria"]}
+        self.assertIsNone(criteria["demand"]["points"])
+        self.assertIsNone(criteria["competition"]["points"])
+        self.assertIn("Não foi encontrada", criteria["demand"]["basis"])
+
+    def test_expired_public_calls_drop_out_of_the_current_radar(self):
+        current = dashboard.current_opportunities(date(2026, 12, 1))
+        self.assertNotIn("alt2030-2026-24-economia-circular", [item["id"] for item in current])
+        self.assertIn("arrisca-c-2026", [item["id"] for item in current])
+        after_deadlines = dashboard.current_opportunities(date(2027, 1, 1))
+        self.assertEqual(after_deadlines, [])
+
+    def test_recommendation_history_deduplicates_and_keeps_the_source_snapshot(self):
+        recommendations = dashboard.build_recommendations(dashboard.current_opportunities(date(2026, 11, 7)))
+        first = dashboard.update_recommendation_history([], recommendations, date(2026, 11, 7))
+        again = dashboard.update_recommendation_history(first, recommendations, date(2026, 11, 8))
+        self.assertEqual(len(again), len(first))
+        self.assertEqual(again[0]["first_seen"], "2026-11-07")
+        self.assertEqual(again[0]["last_seen"], "2026-11-08")
+        self.assertTrue(again[0]["source_url"].startswith("https://"))
+
+    def test_daily_briefing_does_not_reannounce_the_same_opportunity(self):
+        first = dashboard.build_payload([], [], [], [], today=date(2026, 11, 7))
+        self.assertTrue(first["new_recommendation_ids"])
+        self.assertIn("Novos sinais", first["briefing"]["title"])
+        second = dashboard.build_payload(
+            [], [], [], [],
+            previous_history=first["recommendation_history"],
+            today=date(2026, 11, 8),
+        )
+        self.assertEqual(second["new_recommendation_ids"], [])
+        self.assertIn("Sem sinal novo", second["briefing"]["title"])
+
+    def test_alert_history_records_only_observed_financial_thresholds_once(self):
+        observed = dashboard.make_alerts(
+            [{"symbol": "QQQ", "name": "Nasdaq 100", "change_pct": -5.2, "date": "2026-11-06"}],
+            [],
+        )
+        first = dashboard.update_alert_history([], observed, date(2026, 11, 7))
+        again = dashboard.update_alert_history(first, observed, date(2026, 11, 8))
+        self.assertEqual(len(first), 1)
+        self.assertEqual(len(again), 1)
+        self.assertEqual(first[0]["event_id"], "queda:QQQ:2026-11-06")
+        self.assertEqual(dashboard.update_alert_history([], [], date(2026, 11, 7)), [])
 
     def test_ntfy_topic_accepts_slug_and_topic_url_without_exposing_url(self):
         self.assertEqual(ntfy_utils.normalize_topic("dashboard_topic_31"), "dashboard_topic_31")
