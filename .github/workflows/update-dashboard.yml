@@ -1,3 +1,4 @@
+
 name: Atualizar dashboard
 
 on:
@@ -7,13 +8,17 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+
     steps:
       - name: Obter o projeto
         uses: actions/checkout@v5
+
       - name: Recuperar estado de alertas
         uses: actions/cache/restore@v5
         with:
@@ -21,22 +26,37 @@ jobs:
           key: alert-state-${{ github.run_id }}
           restore-keys: |
             alert-state-
+
       - name: Gerar dados e dashboard
         env:
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python3 personal-intelligence-dashboard/build_dashboard.py
+
       - name: Guardar estado de alertas
         uses: actions/cache/save@v5
         with:
           path: personal-intelligence-dashboard/data/active_alerts.json
           key: alert-state-${{ github.run_id }}
-      - name: Disponibilizar dashboard
-        uses: actions/upload-artifact@v6
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparar website para publicação
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: personal-intelligence-dashboard-${{ github.run_number }}
-          path: |
-            personal-intelligence-dashboard/docs/index.html
-            personal-intelligence-dashboard/docs/data.json
-          retention-days: 7
+          path: personal-intelligence-dashboard/docs
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Publicar dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
