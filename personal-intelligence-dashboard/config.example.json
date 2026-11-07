@@ -1,20 +1,106 @@
 {
   "assets": [
-    {"symbol": "SPY", "name": "S&P 500 (ETF de referência)"},
-    {"symbol": "QQQ", "name": "Nasdaq 100 (ETF de referência)"},
-    {"symbol": "VGK", "name": "Europa desenvolvida"},
-    {"symbol": "URTH", "name": "MSCI World (ETF de referência)"},
-    {"symbol": "EEM", "name": "Mercados emergentes"},
-    {"symbol": "GLD", "name": "Ouro (ETF de referência)"},
-    {"symbol": "USO", "name": "Petróleo (ETF de referência)"}
+    {"symbol": "SPY", "name": "S&P 500 (ETF de referência)", "currency": "USD"},
+    {"symbol": "QQQ", "name": "Nasdaq 100", "currency": "USD"},
+    {"symbol": "VGK", "name": "Europa desenvolvida", "currency": "USD"},
+    {"symbol": "URTH", "name": "MSCI World", "currency": "USD"},
+    {"symbol": "EEM", "name": "Mercados emergentes", "currency": "USD"},
+    {"symbol": "GLD", "name": "Ouro (ETF de referência)", "currency": "USD"},
+    {"symbol": "USO", "name": "Petróleo (ETF de referência)", "currency": "USD"}
   ],
   "macro_series": [
-    {"id": "CPIAUCSL", "name": "Inflação (CPI, EUA)", "unit": "índice"},
-    {"id": "FEDFUNDS", "name": "Taxa de fundos federais (EUA)", "unit": "%"},
-    {"id": "UNRATE", "name": "Desemprego (EUA)", "unit": "%"},
-    {"id": "GDP", "name": "PIB (EUA)", "unit": "mil milhões USD"},
-    {"id": "DGS10", "name": "Treasury a 10 anos (EUA)", "unit": "%"},
-    {"id": "VIXCLS", "name": "VIX", "unit": "pontos"}
+    {
+      "id": "CPIAUCSL",
+      "name": "Índice de preços no consumidor (EUA)",
+      "unit": "índice",
+      "frequency": "Mensal",
+      "history_years": 10,
+      "description": "Índice de preços; não é a taxa de inflação mensal.",
+      "source_url": "https://fred.stlouisfed.org/series/CPIAUCSL"
+    },
+    {
+      "id": "FEDFUNDS",
+      "name": "Taxa dos fundos federais (EUA)",
+      "unit": "%",
+      "frequency": "Mensal",
+      "history_years": 10,
+      "description": "Taxa de referência efetiva nos Estados Unidos.",
+      "source_url": "https://fred.stlouisfed.org/series/FEDFUNDS"
+    },
+    {
+      "id": "UNRATE",
+      "name": "Desemprego (EUA)",
+      "unit": "%",
+      "frequency": "Mensal",
+      "history_years": 10,
+      "description": "Taxa de desemprego civil nos Estados Unidos.",
+      "source_url": "https://fred.stlouisfed.org/series/UNRATE"
+    },
+    {
+      "id": "GDP",
+      "name": "PIB nominal (EUA)",
+      "unit": "mil milhões USD",
+      "frequency": "Trimestral",
+      "history_years": 10,
+      "description": "Valor nominal do PIB; não é uma medida de crescimento real.",
+      "source_url": "https://fred.stlouisfed.org/series/GDP"
+    },
+    {
+      "id": "DGS10",
+      "name": "Treasury a 10 anos (EUA)",
+      "unit": "%",
+      "frequency": "Diária",
+      "history_years": 3,
+      "description": "Rendimento de mercado do Treasury dos EUA a 10 anos.",
+      "source_url": "https://fred.stlouisfed.org/series/DGS10"
+    },
+    {
+      "id": "VIXCLS",
+      "name": "VIX",
+      "unit": "pontos",
+      "frequency": "Diária",
+      "history_years": 3,
+      "description": "Indicador de volatilidade implícita do S&P 500; não prevê a direção do mercado.",
+      "source_url": "https://fred.stlouisfed.org/series/VIXCLS"
+    }
   ],
-  "research_topics": "macroeconomics artificial intelligence energy semiconductors"
+  "portugal_series": [
+    {
+      "id": "prc_hicp_minr",
+      "name": "Inflação (HICP, variação anual)",
+      "unit": "%",
+      "frequency": "Mensal",
+      "filters": {"geo": "PT", "freq": "M", "unit": "RCH_A", "coicop18": "TOTAL", "sinceTimePeriod": "2015-01"},
+      "description": "Variação dos preços face ao mesmo mês do ano anterior. Uma taxa menor significa que os preços sobem mais devagar, não que estejam a descer.",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr/default/table?lang=en"
+    },
+    {
+      "id": "une_rt_m",
+      "name": "Desemprego (15–74 anos, ajustado sazonalmente)",
+      "unit": "% da população ativa",
+      "frequency": "Mensal",
+      "filters": {"geo": "PT", "freq": "M", "age": "TOTAL", "sex": "T", "s_adj": "SA", "unit": "PC_ACT", "sinceTimePeriod": "2015-01"},
+      "description": "Percentagem da população ativa sem emprego, à procura de trabalho e disponível para começar.",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/une_rt_m/default/table?lang=en"
+    },
+    {
+      "id": "namq_10_gdp",
+      "name": "PIB real (variação face ao trimestre anterior)",
+      "unit": "%",
+      "frequency": "Trimestral",
+      "filters": {"geo": "PT", "freq": "Q", "na_item": "B1GQ", "unit": "CLV_PCH_PRE", "s_adj": "SCA", "sinceTimePeriod": "2015-Q1"},
+      "description": "Variação trimestral do PIB em volume, corrigida de sazonalidade e calendário.",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table?lang=en"
+    },
+    {
+      "id": "gov_10q_ggdebt",
+      "name": "Dívida pública bruta",
+      "unit": "% do PIB",
+      "frequency": "Trimestral",
+      "filters": {"geo": "PT", "freq": "Q", "na_item": "GD", "sector": "S13", "unit": "PC_GDP", "sinceTimePeriod": "2015-Q1"},
+      "description": "Dívida bruta consolidada das administrações públicas como percentagem do PIB.",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt/default/table?lang=en"
+    }
+  ],
+  "research_topics": "macroeconomics artificial intelligence energy employment inflation semiconductors"
 }

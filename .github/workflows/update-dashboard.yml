@@ -3,6 +3,12 @@ name: Atualizar dashboard
 
 on:
   workflow_dispatch:
+    inputs:
+      test_ntfy:
+        description: "Enviar uma mensagem neutra de teste ntfy (sem alerta financeiro)"
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: "17 8 * * *"
 
@@ -60,3 +66,15 @@ jobs:
       - name: Publicar dashboard
         id: deployment
         uses: actions/deploy-pages@v4
+
+  ntfy-test:
+    if: github.event_name == 'workflow_dispatch' && inputs.test_ntfy
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter o projeto
+        uses: actions/checkout@v5
+      - name: Enviar uma mensagem neutra de teste
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 personal-intelligence-dashboard/send_ntfy_test.py

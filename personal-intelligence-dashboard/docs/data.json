@@ -1,7 +1,11 @@
 {
+  "schema_version": 2,
   "updated_at": null,
   "quotes": [],
   "macro": [],
+  "portugal": [],
   "research": [],
-  "alerts": []
+  "alerts": [],
+  "insights": {"opportunities": [], "risks": []},
+  "health": {"enabled": false}
 }
