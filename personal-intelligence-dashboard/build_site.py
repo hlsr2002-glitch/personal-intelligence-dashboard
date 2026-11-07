@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Gera as páginas HTML independentes do Personal Intelligence Hub."""
 
+import hashlib
 from pathlib import Path
 
 
@@ -26,6 +27,7 @@ ICON = """<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
 
 
 def render_page(current_id: str, title: str, description: str) -> str:
+    asset_version = hashlib.sha256((ASSETS / "hub.js").read_bytes()).hexdigest()[:12]
     links = []
     for filename, page_id, label, _ in PAGES:
         current = ' aria-current="page"' if page_id == current_id else ""
@@ -44,7 +46,7 @@ def render_page(current_id: str, title: str, description: str) -> str:
   <meta name="description" content="{description}">
   <title>{title} · Personal Intelligence Hub</title>
   <link rel="stylesheet" href="assets/hub.css">
-  <script defer src="assets/hub.js"></script>
+  <script defer src="assets/hub.js?v={asset_version}"></script>
 </head>
 <body data-page="{current_id}">
   <a class="skip-link" href="#main">Saltar para o conteúdo principal</a>
