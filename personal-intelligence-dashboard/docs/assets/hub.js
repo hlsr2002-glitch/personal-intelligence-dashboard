@@ -650,7 +650,7 @@
       esc(item.title) + '</p></div><button class="modal-close" type="button" data-action="close-modal" aria-label="Fechar">×</button></div>' +
       '<p class="notice-inline">Pontuação heurística de triagem, não probabilidade de sucesso. Critérios sem dados ficam como N/D e não recebem pontos. Cobertura observada: ' +
       esc(item.score_confidence) + "%.</p><div class=\"rubric\" style=\"margin-top:15px\">" + rows +
-      '</div><p class="chart-note">Compatibilidade é uma regra editorial baseada nos interesses indicados. Procura, concorrência, escala, complexidade e capital total precisam de validação independente.</p></section>';
+      '</div><p class="chart-note">A relevância segue os temas editoriais do Hub, sem usar preferências ou histórico pessoal. Procura, concorrência, escala, complexidade e capital total precisam de validação independente.</p></section>';
     modal.addEventListener("click", function (event) { if (event.target === modal) closeModal(); });
     document.body.appendChild(modal);
     var close = modal.querySelector("[data-action='close-modal']");
