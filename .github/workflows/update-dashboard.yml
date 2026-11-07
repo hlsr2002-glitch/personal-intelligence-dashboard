@@ -1,0 +1,42 @@
+name: Atualizar dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter o projeto
+        uses: actions/checkout@v4
+      - name: Recuperar estado de alertas
+        uses: actions/cache/restore@v4
+        with:
+          path: personal-intelligence-dashboard/data/active_alerts.json
+          key: alert-state-${{ github.run_id }}
+          restore-keys: |
+            alert-state-
+      - name: Gerar dados e dashboard
+        env:
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 personal-intelligence-dashboard/build_dashboard.py
+      - name: Guardar estado de alertas
+        uses: actions/cache/save@v4
+        with:
+          path: personal-intelligence-dashboard/data/active_alerts.json
+          key: alert-state-${{ github.run_id }}
+      - name: Disponibilizar dashboard
+        uses: actions/upload-artifact@v4
+        with:
+          name: personal-intelligence-dashboard-${{ github.run_number }}
+          path: |
+            personal-intelligence-dashboard/docs/index.html
+            personal-intelligence-dashboard/docs/data.json
+          retention-days: 7
