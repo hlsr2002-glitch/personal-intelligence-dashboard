@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Obter o projeto
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Recuperar estado de alertas
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: personal-intelligence-dashboard/data/active_alerts.json
           key: alert-state-${{ github.run_id }}
@@ -28,12 +28,12 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python3 personal-intelligence-dashboard/build_dashboard.py
       - name: Guardar estado de alertas
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: personal-intelligence-dashboard/data/active_alerts.json
           key: alert-state-${{ github.run_id }}
       - name: Disponibilizar dashboard
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: personal-intelligence-dashboard-${{ github.run_number }}
           path: |
